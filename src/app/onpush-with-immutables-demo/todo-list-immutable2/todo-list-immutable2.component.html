@@ -1,0 +1,27 @@
+<div
+  #todoListEle
+  class="p-5 w-96 bg-gray-100 grid gap-4 grid-cols-1 rounded shadow-lg"
+>
+  <app-todo-detail-immutable
+    (newTodoAdded)="addTodo($event)"
+    class="w-80 h-auto col-span-2 mx-auto"
+  ></app-todo-detail-immutable>
+  <div class="text-sm grid gap-y-2 grid-cols-1">
+    <h2>ChangeDetection.OnPush</h2>
+    <ul class="list-outside text-xs grid gap-2 grid-cols-4">
+      <ng-container *ngFor="let todo of todoList">
+        <li class="truncate overflow-ellipsis">{{ todo.id }}</li>
+        <li>{{ todo.name }}</li>
+        <li>{{ todo.date | date: "shortDate" }}</li>
+        <li>
+          {{todo.completed}}
+          <input
+            type="checkbox"
+            [ngModel]="todo.completed"
+            (ngModelChange)="markCompleted(todo)"
+          />
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</div>

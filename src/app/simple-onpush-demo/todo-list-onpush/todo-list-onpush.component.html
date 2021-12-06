@@ -1,0 +1,16 @@
+<div #todoListEle2 class="p-5 bg-gray-100 grid gap-4 grid-cols-1 rounded shadow-lg">
+  <app-todo-detail
+    [todoList]="todoList"
+    class="w-96 h-auto col-span-2 mx-auto"
+  ></app-todo-detail>
+  <div class="text-sm grid gap-y-2 grid-cols-1">
+    <h2>ChangeDetection.OnPush</h2>
+    <ul class="grid gap-y-2 grid-cols-1" *ngFor="let todo of todoList">
+      <li>{{ todo.id }}</li>
+      <li>{{ todo.name }}</li>
+      <li>{{ todo.date | date: "shortDate" }}</li>
+      <li>{{ todo.completed }}</li>
+    </ul>
+    {{runChangeDetection}}
+  </div>
+</div>
