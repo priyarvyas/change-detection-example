@@ -1,48 +1,20 @@
-<div #todoEle class="p-5 bg-gray-100 grid gap-4 grid-cols-1 rounded shadow-lg">
+<div #todoEle class="p-5 bg-gray-100 w-80 h-auto my-10 mx-auto grid gap-4 grid-cols-1 rounded shadow-lg">
   <h2 class="text-lg text-blue-500 font-semibold">Create a new task</h2>
   <div class="grid gap-y-4">
     <div class="grid">
       <label class="text-xs" for="task-name">Add task detail:</label>
       <input
-        [(ngModel)]="newTodo.name"
+        [(ngModel)]="todoLabel"
         class="border-2 p-2 border-blue-300 focus:border-blue-50"
         type="text"
         id="task-name"
         maxlength="100"
       />
     </div>
-    <div class="grid">
-      <label class="text-xs" for="task-date">Date:</label>
-      <input
-        [(ngModel)]="newTodo.date"
-        class="border-2 p-2 border-blue-300 focus:border-blue-50"
-        type="date"
-        id="task-date"
-        name="task-date"
-      />
-    </div>
-    <div class="grid">
-      <label class="text-xs" for="task-complete">Completed:</label>
-      <input
-        [(ngModel)]="newTodo.completed"
-        type="checkbox"
-        id="task-complete"
-        name="task-complete"
-      />
-    </div>
   </div>
   <button
-    (click)="updateTodo()"
-    class="
-      mx-auto
-      shadow-md
-      w-24
-      p-2
-      bg-blue-500
-      rounded
-      hover:bg-blue-700
-      text-white
-    "
+    (click)="addTodo.emit(todoLabel); resetTodo()"
+    class="my-btn"
   >
     Add task
   </button>

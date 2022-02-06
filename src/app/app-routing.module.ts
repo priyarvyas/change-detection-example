@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ChangeDetectionExplainedComponent } from './change-detection-explained.component';
+import { HighchartExampleComponent } from './highchart-example/highchart-example.component';
+
 
 const routes: Routes = [
   {
@@ -10,20 +11,26 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: ChangeDetectionExplainedComponent
+    component: HighchartExampleComponent,
   },
   {
     path: 'simple-onpush-demo',
-    loadChildren: () => import('src/app/simple-onpush-demo/simple-onpush-demo.module').then(m => m.SimpleOnPushDemoModule)
+    loadChildren: () =>
+      import('src/app/simple-onpush-demo/simple-onpush-demo.module').then(
+        (m) => m.SimpleOnPushDemoModule
+      ),
   },
   {
     path: 'immutable-onpush-demo',
-    loadChildren: () => import('src/app/onpush-with-immutables-demo/onpush-with-immutables-demo.module').then(m => m.OnPushWithImmutablesDemoModule)
+    loadChildren: () =>
+      import(
+        'src/app/onpush-with-immutables-demo/onpush-with-immutables-demo.module'
+      ).then((m) => m.OnPushWithImmutablesDemoModule),
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

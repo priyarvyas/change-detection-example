@@ -1,4 +1,8 @@
 <div class="grid grid-cols-2 gap-y-6 py-5">
+  <app-todo-detail-immutable
+    (addTodo)="addTodo($event)"
+    class="w-80 h-auto col-span-2 mx-auto"
+  ></app-todo-detail-immutable>
   <app-todo-list-immutable
     [todoList]="todoService.todoList$ | async"
     class="mx-auto"

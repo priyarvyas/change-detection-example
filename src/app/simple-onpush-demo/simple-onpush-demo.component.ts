@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../todo.models';
+import { getRandomInt } from '../util';
 
 @Component({
   selector: 'app-simple-onpush-demo',
@@ -9,10 +10,17 @@ import { Todo } from '../todo.models';
 export class SimpleOnpushDemoComponent implements OnInit {
 
   constructor() { }
+
   todoList: Todo[] = [];
-  todoList2: Todo[] = [];
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  addNewTodo(label: string): void {
+    const newTodo: Todo = {
+      id: getRandomInt(1, 25),
+      name: label,
+      completed: false
+    };
+    this.todoList.push(newTodo);
   }
-
 }

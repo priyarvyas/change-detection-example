@@ -8,15 +8,17 @@ import {
   Input,
   NgZone,
   OnChanges,
-  OnDestroy,
   OnInit,
+  Renderer2,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { TodoService } from 'src/app/todo.service';
 import { Todo } from '../../todo.models';
-import { tap } from 'rxjs/operators';
+import { highlightComponent } from 'src/app/util';
+import { List } from 'immutable';
 
+// tslint:disable-next-line: no-conflicting-lifecycle
 @Component({
   selector: 'app-todo-list-immutable',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,70 +26,40 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./todo-list-immutable.component.scss'],
 })
 export class TodoListImmutableComponent
-  implements OnInit, AfterViewChecked, OnChanges, OnDestroy, DoCheck
+  implements OnInit, AfterViewChecked, OnChanges, DoCheck
 {
   constructor(
     private zone: NgZone,
     public cd: ChangeDetectorRef,
-    public todoService: TodoService
+    public todoService: TodoService,
+    public render: Renderer2
   ) {}
-  ngDoCheck(): void {
-    console.log(' do check>>');
-  }
-  ngOnDestroy(): void {
-    this.todoSubscription.unsubscribe();
-  }
+
+  @Input() todoList: List<Todo>;
 
   @ViewChild('todoListEle') todoListEle: ElementRef<HTMLElement>;
 
-  todoSubscription = this.todoService.todoList$
-    .pipe(
-      tap((todos) => {
-        this.updateTodoList(todos);
-      })
-    )
-    .subscribe();
+  ngDoCheck(): void {
+    //console.log(this.constructor.name, '-- ', this.ngDoCheck.name);
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
+    //console.log(this.constructor.name, ' -- ', this.ngOnChanges.name, ' -- ', changes);
   }
 
   ngAfterViewChecked(): void {
-    this.zone.runOutsideAngular(() => {
-      this.todoListEle.nativeElement.classList.add('highlight');
-      setTimeout(() => {
-        this.todoListEle.nativeElement.classList.remove('highlight');
-      }, 1500);
-    });
+    //highlightComponent(this.zone, this.todoListEle, this.render);
   }
-
-  @Input() todoList: Todo[];
 
   ngOnInit(): void {}
-
-  addTodo(newTodo: Todo) {
-    console.log('Adding todo');
-    this.todoList.push(newTodo);
-    this.todoService.setTodoList(this.todoList);
-  }
 
   markCompleted(currentTodo: Todo) {
     currentTodo.completed = !currentTodo.completed;
     this.todoService.updateTodo(currentTodo);
-    // this.todoList = this.todoList.map((todo) => {
-    //   if(todo.id === currentTodo.id) {
-    //     todo = {
-    //       ...todo,
-    //       completed: currentTodo.completed,
-    //     }
-    //   }
-    //   return todo;
-    // });
   }
 
-  updateTodoList(todoList: Todo[]) {
-    console.log('called??', todoList);
+  updateTodoList(todoList: List<Todo>) {
+    //console.log('called??', todoList);
     this.todoList = todoList;
   }
-
 }

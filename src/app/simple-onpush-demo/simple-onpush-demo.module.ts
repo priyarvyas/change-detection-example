@@ -9,7 +9,7 @@ import { SimpleOnPushRoutingModule } from './simple-onpush-routing.module';
 import { TodoListOnpushComponent } from './todo-list-onpush/todo-list-onpush.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { SimpleOnpushDemoComponent } from './simple-onpush-demo.component';
-import { ChangeDetectionExplainedComponent } from '../change-detection-explained.component';
+import { CalculateCodePipeModule } from '../calculate-code.pipe.module';
 
 @NgModule({
   declarations: [
@@ -17,13 +17,13 @@ import { ChangeDetectionExplainedComponent } from '../change-detection-explained
     TodoListOnpushComponent,
     TodoDetailComponent,
     TodoListComponent,
-    ChangeDetectionExplainedComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     FormsModule,
-    SimpleOnPushRoutingModule
+    SimpleOnPushRoutingModule,
+    CalculateCodePipeModule
   ],
 })
 export class SimpleOnPushDemoModule { }

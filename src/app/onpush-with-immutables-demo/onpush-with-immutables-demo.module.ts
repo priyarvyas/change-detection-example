@@ -10,19 +10,21 @@ import { TodoListImmutableComponent } from './todo-list-immutable/todo-list-immu
 import { OnPushWithImmutablesDemoComponent } from './onpush-with-immutables-demo.component';
 import { TodoService } from '../todo.service';
 import { TodoListImmutableComponent2 } from './todo-list-immutable2/todo-list-immutable2.component';
+import { CalculateCodePipeModule } from '../calculate-code.pipe.module';
 
 @NgModule({
   declarations: [
     OnPushWithImmutablesDemoComponent,
     TodoDetailImmutableComponent,
     TodoListImmutableComponent,
-    TodoListImmutableComponent2
+    TodoListImmutableComponent2,
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     FormsModule,
-    OnPushWithImmutablesRoutingModule
+    OnPushWithImmutablesRoutingModule,
+    CalculateCodePipeModule
   ],
   providers: [TodoService]
 })

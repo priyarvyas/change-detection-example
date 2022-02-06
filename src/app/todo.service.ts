@@ -1,12 +1,19 @@
-import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { List } from 'immutable';
+import { BehaviorSubject } from 'rxjs';
 import { Todo } from './todo.models';
 
 export class TodoService {
-  private todoList: BehaviorSubject<Todo[]> = new BehaviorSubject<Todo[]>([]);
+  private todoList: BehaviorSubject<List<Todo>> = new BehaviorSubject<List<Todo>>(List([]));
   todoList$ = this.todoList.asObservable();
 
-  public setTodoList(todoList: Todo[]) {
+
+  public addNewTodo(newTodo: Todo) {
+    const oldTodoList = this.todoList.getValue();
+    const newList = oldTodoList.push(newTodo);
+    this.todoList.next(newList);
+  }
+
+  public setTodoList(todoList: List<Todo>) {
     const newList = Object.assign([], todoList);
     this.todoList.next(newList);
   }

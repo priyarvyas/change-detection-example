@@ -5,19 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
-import { ChangeDetectionExplainedComponent } from './change-detection-explained.component';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { HighchartExampleComponent } from './highchart-example/highchart-example.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    HighchartExampleComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HighchartsChartModule,
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

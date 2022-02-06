@@ -11,19 +11,24 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
+  Renderer2,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { TodoService } from 'src/app/todo.service';
 import { Todo } from '../../todo.models';
 import { tap } from 'rxjs/operators';
+import { highlightComponent } from 'src/app/util';
+import { List } from 'immutable';
 
+// tslint:disable-next-line: no-conflicting-lifecycle
 @Component({
   selector: 'app-todo-list-immutable2',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './todo-list-immutable2.component.html',
   styleUrls: ['./todo-list-immutable2.component.scss'],
 })
+// tslint:disable-next-line: component-class-suffix
 export class TodoListImmutableComponent2
   implements
     OnInit,
@@ -36,52 +41,39 @@ export class TodoListImmutableComponent2
   constructor(
     private zone: NgZone,
     public cd: ChangeDetectorRef,
-    public todoService: TodoService
+    public todoService: TodoService,
+    public render: Renderer2
   ) {}
-  ngAfterContentChecked(): void {
-    console.log(' after content checked 2>>');
-  }
-  ngDoCheck(): void {
-    console.log(' do check 2>>');
-    //this.todoList = [{id: '', name: 'hahaha', completed: false, date: new Date()}]
-    console.log(this.todoList, 'is changed???');
-  }
-  ngOnDestroy(): void {
-    this.todoSubscription.unsubscribe();
-  }
+
+  @Input() todoList: List<Todo>;
 
   @ViewChild('todoListEle') todoListEle: ElementRef<HTMLElement>;
 
-  todoSubscription = this.todoService.todoList$
-    .pipe(
-      tap((todos) => {
-        this.updateTodoList(todos);
-      })
-    )
-    .subscribe();
+  // todoSubscription = this.todoService.todoList$
+  //   .pipe(
+  //     tap((todos) => {
+  //       this.updateTodoList(todos);
+  //     })
+  //   )
+  //   .subscribe();
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes, ' why you no run??');
+  ngAfterContentChecked(): void {
+    //console.log(this.constructor.name, '-- ', this.ngAfterContentChecked.name);
   }
+  ngDoCheck(): void {
+    //console.log(this.constructor.name, '-- ', this.ngDoCheck.name);
+  }
+  ngOnDestroy(): void {
+    // this.todoSubscription.unsubscribe();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {}
 
   ngAfterViewChecked(): void {
-    this.zone.runOutsideAngular(() => {
-      this.todoListEle.nativeElement.classList.add('highlight');
-      setTimeout(() => {
-        this.todoListEle.nativeElement.classList.remove('highlight');
-      }, 1500);
-    });
+    //highlightComponent(this.zone, this.todoListEle, this.render);
   }
-
-  @Input() todoList: Todo[];
 
   ngOnInit(): void {}
-
-  addTodo(newTodo: Todo) {
-    console.log('Adding todo');
-    this.todoList.push(newTodo);
-    this.todoService.setTodoList(this.todoList);
-  }
 
   markCompleted(currentTodo: Todo) {
     currentTodo.completed = !currentTodo.completed;
@@ -97,8 +89,21 @@ export class TodoListImmutableComponent2
     // });
   }
 
-  updateTodoList(todoList: Todo[]) {
-    console.log('called??', todoList);
+  updateTodoList(todoList: List<Todo>) {
+    //console.log('called??', todoList);
     this.todoList = todoList;
+  }
+
+  getCode(id: number): string {
+    //console.log(' func ', id);
+    const code = this.calculateCode(id) + '-code';
+    return code;
+  }
+
+  calculateCode(id: number): number {
+    if (id === 1 || id === 2) {
+      return 1;
+    }
+    return this.calculateCode(id - 1) + this.calculateCode(id - 2);
   }
 }

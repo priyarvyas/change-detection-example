@@ -1,15 +1,19 @@
-<div #todoListEle class="p-5 bg-gray-100 grid gap-4 grid-cols-1 rounded shadow-lg">
-  <app-todo-detail
-    [todoList]="todoList"
-    class="w-96 h-auto col-span-2 mx-auto"
-  ></app-todo-detail>
+<div
+  #todoListEle
+  class="p-5 w-96 bg-gray-100 grid gap-4 grid-cols-1 rounded shadow-lg"
+>
   <div class="text-sm grid gap-y-2 grid-cols-1">
     <h2>ChangeDetection.Default</h2>
-    <ul class="grid gap-y-2 grid-cols-1" *ngFor="let todo of todoList">
-      <li>{{ todo.id }}</li>
-      <li>{{ todo.name }}</li>
-      <li>{{ todo.date | date: "shortDate" }}</li>
-      <li>{{ todo.completed }}</li>
+    <ul class="list-outside text-xs grid gap-2 grid-cols-4">
+      <ng-container *ngFor="let todo of todoList">
+        <li class="">{{ todo.id | calculateCode }}</li>
+        <li class="truncate overflow-ellipsis">{{ todo.id }}</li>
+        <li>{{ todo.name }}</li>
+        <li>
+          {{ todo.completed }}
+          <input type="checkbox" [ngModel]="todo.completed" />
+        </li>
+      </ng-container>
     </ul>
   </div>
 </div>
