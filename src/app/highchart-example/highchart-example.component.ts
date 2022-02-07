@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   DoCheck,
   NgZone,
@@ -9,6 +10,7 @@ HC_customEvents(Highcharts);
 
 @Component({
   selector: 'app-highchart-example',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './highchart-example.component.html',
   styleUrls: ['./highchart-example.component.scss']
 })

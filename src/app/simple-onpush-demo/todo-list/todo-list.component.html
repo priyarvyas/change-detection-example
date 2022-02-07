@@ -6,7 +6,7 @@
     <h2>ChangeDetection.Default</h2>
     <ul class="list-outside text-xs grid gap-2 grid-cols-4">
       <ng-container *ngFor="let todo of todoList">
-        <li class="">{{ todo.id | calculateCode }}</li>
+        <li class="">{{ todo.id }}</li>
         <li class="truncate overflow-ellipsis">{{ todo.id }}</li>
         <li>{{ todo.name }}</li>
         <li>

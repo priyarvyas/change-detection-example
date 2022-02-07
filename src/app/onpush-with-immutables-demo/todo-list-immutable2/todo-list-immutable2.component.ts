@@ -18,7 +18,6 @@ import {
 import { TodoService } from 'src/app/todo.service';
 import { Todo } from '../../todo.models';
 import { tap } from 'rxjs/operators';
-import { highlightComponent } from 'src/app/util';
 import { List } from 'immutable';
 
 // tslint:disable-next-line: no-conflicting-lifecycle

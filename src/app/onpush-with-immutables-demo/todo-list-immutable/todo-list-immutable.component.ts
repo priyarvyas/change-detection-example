@@ -15,7 +15,6 @@ import {
 } from '@angular/core';
 import { TodoService } from 'src/app/todo.service';
 import { Todo } from '../../todo.models';
-import { highlightComponent } from 'src/app/util';
 import { List } from 'immutable';
 
 // tslint:disable-next-line: no-conflicting-lifecycle
@@ -61,5 +60,12 @@ export class TodoListImmutableComponent
   updateTodoList(todoList: List<Todo>) {
     //console.log('called??', todoList);
     this.todoList = todoList;
+  }
+
+  calculateCode(id: number): number {
+    if (id === 1 || id === 2) {
+      return 1;
+    }
+    return this.calculateCode(id - 1) + this.calculateCode(id - 2);
   }
 }

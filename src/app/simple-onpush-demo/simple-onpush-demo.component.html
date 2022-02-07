@@ -1,14 +1,12 @@
-<app-todo-detail
-  (addTodo)="addNewTodo($event)"
-  class=""
-></app-todo-detail>
-
+<div class="grid grid-cols-2 gap-y-6 py-5">
+  <app-todo-detail (addTodo)="addNewTodo($event)" class=""></app-todo-detail>
+  <app-todo-detail (addTodo)="addNewTodo2($event)" class=""></app-todo-detail>
+</div>
 <div class="grid grid-cols-2 gap-y-6 py-5">
   <app-todo-list [todoList]="todoList" class="mx-auto"></app-todo-list>
   <app-todo-list-onpush
-    [todoList]="todoList"
+    [todoList]="todoList2"
     class="mx-auto"
   ></app-todo-list-onpush>
 </div>
 
-<!-- <cd-explain></cd-explain> -->

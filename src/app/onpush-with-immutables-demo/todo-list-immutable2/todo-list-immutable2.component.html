@@ -6,7 +6,7 @@
     <h2>ChangeDetection.OnPush</h2>
     <ul class="list-outside text-xs grid gap-2 grid-cols-3">
       <ng-container *ngFor="let todo of todoList">
-        <li class="truncate overflow-ellipsis">{{ todo.id | calculateCode }}</li>
+        <li class="truncate overflow-ellipsis">{{ calculateCode(todo.id) }}</li>
         <li>{{ todo.name }}</li>
         <li>
           {{todo.completed}}

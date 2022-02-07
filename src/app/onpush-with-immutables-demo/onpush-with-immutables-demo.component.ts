@@ -25,7 +25,7 @@ export class OnPushWithImmutablesDemoComponent implements DoCheck {
   addTodo(label: string) {
     //console.log('Adding todo');
     const newTodo: Todo = {
-      id: getRandomInt(1, 25),
+      id: getRandomInt(1, 30),
       name: label,
       completed: false,
     };

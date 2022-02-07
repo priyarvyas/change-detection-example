@@ -12,10 +12,10 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { highlightComponent } from 'src/app/util';
 
 @Component({
   selector: 'app-todo-detail-immutable',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './todo-detail-immutable.component.html',
   styleUrls: ['./todo-detail-immutable.component.scss'],
 })

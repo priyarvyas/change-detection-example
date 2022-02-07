@@ -1,6 +1,5 @@
 import { AfterViewChecked, Component, ElementRef, Input, NgZone, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { List } from 'immutable';
-import { highlightComponent } from 'src/app/util';
 import { Todo } from '../../todo.models';
 
 @Component({
@@ -8,7 +7,7 @@ import { Todo } from '../../todo.models';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss']
 })
-export class TodoListComponent implements OnInit, AfterViewChecked {
+export class TodoListComponent implements OnInit {
 
   constructor(private zone: NgZone, public render: Renderer2) { }
 
@@ -17,10 +16,6 @@ export class TodoListComponent implements OnInit, AfterViewChecked {
   @Input() todoList: Todo[];
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewChecked(): void {
-    highlightComponent(this.zone, this.todoListEle, this.render);
   }
 
   // calculateCode(id: number): number {

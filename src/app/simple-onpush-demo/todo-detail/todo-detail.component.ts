@@ -13,7 +13,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Todo } from '../../todo.models';
-import { getRandomInt, highlightComponent } from 'src/app/util';
+import { getRandomInt } from 'src/app/util';
 import { List } from 'immutable';
 
 @Component({
@@ -21,7 +21,7 @@ import { List } from 'immutable';
   templateUrl: './todo-detail.component.html',
   styleUrls: ['./todo-detail.component.scss'],
 })
-export class TodoDetailComponent implements OnInit, AfterViewChecked {
+export class TodoDetailComponent implements OnInit {
   constructor(private zone: NgZone, public render: Renderer2, private cdRef: ChangeDetectorRef) {}
 
   @ViewChild('todoEle') todoEle: ElementRef<HTMLElement>;
@@ -31,10 +31,6 @@ export class TodoDetailComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(): void {
     this.todoLabel = '';
-  }
-
-  ngAfterViewChecked(): void {
-    highlightComponent(this.zone, this.todoEle, this.render);
   }
 
   resetTodo(): void {
